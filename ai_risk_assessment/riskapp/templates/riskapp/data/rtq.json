@@ -1,0 +1,40 @@
+{
+  "category": "RTQ",
+  "responses": [
+    {
+      "Risk Principle": "Data Privacy",
+      "Question": "Are user data logs securely stored?",
+      "Rating": "High",
+      "Guidance": "Ensure data encryption",
+      "Answer": ""
+    },
+    {
+      "Risk Principle": "Algorithmic Bias",
+      "Question": "Does the model treat all demographics fairly?",
+      "Rating": "Medium",
+      "Guidance": "Audit training data",
+      "Answer": ""
+    },
+    {
+      "Risk Principle": "Model Accuracy",
+      "Question": "Has the AI been tested against benchmark datasets?",
+      "Rating": "High",
+      "Guidance": "Use diverse validation sets",
+      "Answer": ""
+    },
+    {
+      "Risk Principle": "Transparency",
+      "Question": "Are AI decisions explainable?",
+      "Rating": "Low",
+      "Guidance": "Provide clear documentation",
+      "Answer": ""
+    },
+    {
+      "Risk Principle": "Security",
+      "Question": "Is there protection against adversarial attacks?",
+      "Rating": "High",
+      "Guidance": "Implement robust security measures",
+      "Answer": ""
+    }
+  ]
+}

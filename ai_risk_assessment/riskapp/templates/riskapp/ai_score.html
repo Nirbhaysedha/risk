@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artificial Intelligence Risk Score</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 40px;
+            background-color: #f4f7f9;
+        }
+        h2, h3 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+        .high { background-color: #ff4d4d; color: white; }
+        .substantial { background-color: #ffa500; color: white; }
+        .moderate { background-color: #ffff66; color: black; }
+        .low { background-color: #66ff66; color: black; }
+        .summary-row {
+            font-weight: bold;
+            background-color: #ecf0f1;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Artificial Intelligence Risk Score</h2>
+
+    <!-- Score Range Table -->
+    <h3>AI Principle Risk Scoring</h3>
+    <table>
+        <tr>
+            <th>AI Principle Risk Scoring</th>
+            <th>Min</th>
+            <th>Max</th>
+        </tr>
+        <tr class="high">
+            <td>High (≥ 0.85)</td>
+            <td>85%</td>
+            <td>100%</td>
+        </tr>
+        <tr class="substantial">
+            <td>Substantial (≥ 0.6)</td>
+            <td>60%</td>
+            <td>85%</td>
+        </tr>
+        <tr class="moderate">
+            <td>Moderate (≥ 0.3)</td>
+            <td>30%</td>
+            <td>60%</td>
+        </tr>
+        <tr class="low">
+            <td>Low (< 0.3)</td>
+            <td>0%</td>
+            <td>30%</td>
+        </tr>
+    </table>
+
+    <!-- Assessed Score Table -->
+    <h3>AI Principle Risk Assessment</h3>
+    <table>
+        <tr>
+            <th>AI Principle</th>
+            <th>Max</th>
+            <th>Min</th>
+            <th>Assessed Score</th>
+            <th>Risk</th>
+            <th>Assessed Score %</th>
+            <th>Inherent Risk Score</th>
+        </tr>
+        <tr class="high"><td>Data Privacy</td><td>100%</td><td>0%</td><td>0.90</td><td>High</td><td>90%</td><td>0.9</td></tr>
+        <tr class="substantial"><td>Algorithmic Bias</td><td>100%</td><td>0%</td><td>0.70</td><td>Substantial</td><td>70%</td><td>0.7</td></tr>
+        <tr class="moderate"><td>Explainability</td><td>100%</td><td>0%</td><td>0.50</td><td>Moderate</td><td>50%</td><td>0.5</td></tr>
+        <tr class="low"><td>Security</td><td>100%</td><td>0%</td><td>0.20</td><td>Low</td><td>20%</td><td>0.2</td></tr>
+        <tr class="high"><td>Accountability</td><td>100%</td><td>0%</td><td>0.88</td><td>High</td><td>88%</td><td>0.88</td></tr>
+        <tr class="moderate"><td>Reliability</td><td>100%</td><td>0%</td><td>0.45</td><td>Moderate</td><td>45%</td><td>0.45</td></tr>
+        <tr class="substantial"><td>Transparency</td><td>100%</td><td>0%</td><td>0.65</td><td>Substantial</td><td>65%</td><td>0.65</td></tr>
+        <tr class="low"><td>Safety</td><td>100%</td><td>0%</td><td>0.28</td><td>Low</td><td>28%</td><td>0.28</td></tr>
+        <tr class="substantial"><td>Data Integrity</td><td>100%</td><td>0%</td><td>0.75</td><td>Substantial</td><td>75%</td><td>0.75</td></tr>
+        <tr class="high"><td>Fairness</td><td>100%</td><td>0%</td><td>0.86</td><td>High</td><td>86%</td><td>0.86</td></tr>
+    </table>
+
+    <!-- Inherent Risk Scoring Table -->
+    <h3>Inherent Risk Scoring</h3>
+    <table>
+        <tr>
+            <th>Inherent Risk Scoring</th>
+            <th>High</th>
+            <th>Substantial</th>
+            <th>Moderate</th>
+            <th>Low</th>
+        </tr>
+        <tr>
+            <td>Number of AI Principles</td>
+            <td>3</td>
+            <td>3</td>
+            <td>2</td>
+            <td>2</td>
+        </tr>
+        <tr class="summary-row">
+            <td>Percentage of Total</td>
+            <td>30%</td>
+            <td>30%</td>
+            <td>20%</td>
+            <td>20%</td>
+        </tr>
+        <tr class="summary-row">
+            <td>Average Assessed Score</td>
+            <td>0.88</td>
+            <td>0.70</td>
+            <td>0.48</td>
+            <td>0.24</td>
+        </tr>
+        <tr class="summary-row">
+            <td>Risk Category</td>
+            <td>Critical</td>
+            <td>Moderate</td>
+            <td>Manageable</td>
+            <td>Minimal</td>
+        </tr>
+    </table>
+
+</body>
+</html>

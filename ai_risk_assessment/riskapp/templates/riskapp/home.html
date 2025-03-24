@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Risk Assessment</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <style>
+        .logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.5)); /* Subtle shadow */
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0fabed, #2fadd7, #2C5364);
+            color: white;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Heading Styling */
+        h1 {
+            font-size: 40px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+            margin-bottom: 40px;
+        }
+
+        /* Button Container */
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 80%;
+            max-width: 1000px;
+        }
+
+        /* Base Button Styling */
+        .button {
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(12px);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            width: 250px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Different Colors for Each Button */
+        .button:nth-child(1) { background-color: #ff7b72; }  /* Soft Red */
+        .button:nth-child(2) { background-color: #ffb347; }  /* Orange */
+        .button:nth-child(3) { background-color: #ffd700; }  /* Gold */
+        .button:nth-child(4) { background-color: #90ee90; }  /* Light Green */
+        .button:nth-child(5) { background-color: #87ceeb; }  /* Sky Blue */
+        .button:nth-child(6) { background-color: #4682b4; }  /* Steel Blue */
+        .button:nth-child(7) { background-color: #9370db; }  /* Medium Purple */
+        .button:nth-child(8) { background-color: #ff69b4; }  /* Hot Pink */
+        .button:nth-child(9) { background-color: #cd5c5c; }  /* Indian Red */
+        .button:nth-child(10) { background-color: #20b2aa; } /* Light Sea Green */
+        .button:nth-child(11) { background-color: #ff6347; } /* Tomato */
+        .button:nth-child(12) { background-color: #40e0d0; } /* Turquoise */
+        .button:nth-child(13) { background-color: #6a5acd; } /* Slate Blue */
+
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 255, 0.5);
+            opacity: 0.9;
+        }
+
+        /* Badge Styling */
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: red;
+            color: white;
+            font-size: 14px;
+            padding: 5px 8px;
+            border-radius: 50%;
+        }
+
+        /* Responsive Spacing */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+            .button-container {
+                width: 90%;
+            }
+            .button {
+                width: 200px;
+                height: 70px;
+                font-size: 14px;
+            }
+            .button i {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img class="logo" src="{% static 'img/KPMG_logo.svg.png' %}" alt="KPMG Logo">
+    <div class="button-container">
+        <button class="button" onclick="window.location.href='/userguide/'">
+            <span class="badge">1</span>
+            <i class="fas fa-book"></i> User Guide
+        </button>
+        <button class="button" onclick="window.location.href='/Definitions/'">
+            <span class="badge">2</span>
+            <i class="fas fa-info-circle"></i> Definitions
+        </button>
+        <button class="button" onclick="window.location.href='/Frameworks/'">
+            <span class="badge">3</span>
+            <i class="fas fa-cogs"></i> Frameworks & Standards
+        </button>
+        <!--
+        <button class="button" onclick="window.location.href='/Formula/'">
+            <span class="badge">4</span>
+            <i class="fas fa-calculator"></i> Formula Used
+        </button>
+        -->
+        <button class="button" onclick="window.location.href='/Flowchart/'">
+            <span class="badge">5</span>
+            <i class="fas fa-project-diagram"></i> FlowChart
+        </button>
+        <button class="button" onclick="window.location.href='/RTQ/'">
+            <span class="badge">6</span>
+            <i class="fas fa-tasks"></i> RTQ
+        </button>
+        <button class="button" onclick="window.location.href='/PII/'">
+            <span class="badge">7</span>
+            <i class="fas fa-user-shield"></i> PII Qs
+        </button>
+        <button class="button" onclick="window.location.href='/RIQ/'">
+            <span class="badge">8</span>
+            <i class="fas fa-robot"></i> AI Inherent Risk Qs (RIQ)
+        </button>
+        <button class="button" onclick="window.location.href='/ai_score/'">
+            <span class="badge">9</span>
+            <i class="fas fa-chart-line"></i> AI Inherent Risk Score
+        </button>
+        <button class="button" onclick="window.location.href='/cmatrix/'">
+            <span class="badge">10</span>
+            <i class="fas fa-shield-alt"></i> AI Risk Control Matrix
+        </button>
+        <button class="button" onclick="window.location.href='/RCM/'">
+            <span class="badge">11</span>
+            <i class="fas fa-check-circle"></i> Control Assessment (RCM)
+        </button>
+        <button class="button" onclick="window.location.href='/rescore/'">
+            <span class="badge">12</span>
+            <i class="fas fa-exclamation-triangle"></i> AI Residual Risk Score
+        </button>
+        <button class="button">
+            <span class="badge">13</span>
+            <i class="fas fa-chart-pie"></i> Dashboard CMS
+        </button>
+    </div>
+
+</body>
+</html>
+

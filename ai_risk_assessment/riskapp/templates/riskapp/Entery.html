@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #34495e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #2c3e50;
+        }
+        .success-message {
+            display: none;
+            color: green;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Tester Information Form</h2>
+        <form id="userForm">
+            <div class="form-group">
+                <label for="testerName">Tester Name:</label>
+                <input type="text" id="testerName" name="testerName" required>
+            </div>
+            <div class="form-group">
+                <label for="organization">Organization Name:</label>
+                <input type="text" id="organization" name="organization" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select id="role" name="role">
+                    <option value="">Select</option>
+                    <option value="QA Tester">QA Tester</option>
+                    <option value="Developer">Developer</option>
+                    <option value="Manager">Manager</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="remarks">Remarks:</label>
+                <input type="text" id="remarks" name="remarks">
+            </div>
+            <button type="submit">Submit</button>
+            <p class="success-message" id="successMessage">Data Saved Successfully!</p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('userForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent page reload
+
+            let formData = {
+                testerName: document.getElementById('testerName').value,
+                organization: document.getElementById('organization').value,
+                email: document.getElementById('email').value,
+                role: document.getElementById('role').value,
+                remarks: document.getElementById('remarks').value
+            };
+
+            fetch('/save_entry', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    document.getElementById('successMessage').style.display = 'block';
+                    setTimeout(() => { document.getElementById('successMessage').style.display = 'none'; }, 3000);
+                    document.getElementById('userForm').reset(); // Clear form
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artificial Inherent Risk Scoring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .question-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #ecf0f1;
+        }
+        .question {
+            font-size: 18px;
+            flex: 1;
+        }
+        .pillars {
+            font-size: 14px;
+            color: #ffffff;
+            background: #3498db;
+            padding: 5px 10px;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 5px;
+        }
+        .options label {
+            cursor: pointer;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #109af7;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .submit-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .submit-btn:hover {
+            background: #2980b9;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Artificial Inherent Risk Scoring</h1>
+        <form>
+            <div class="question-container">
+                <div class="question">1. Is the system prone to bias in decision-making?</div>
+                <div class="pillars">Fairness, Accountability</div>
+            </div>
+            <div class="options">
+                <label><input type="radio" name="2" value="2">2</label>
+                <label><input type="radio" name="4" value="4">4</label>
+                <label><input type="radio" name="6" value="6">6</label>
+            </div>
+            <div class="question-container">
+                <div class="question">2. Does the model have transparency in its decision-making process?</div>
+                <div class="pillars">Transparency, Explainability</div>
+            </div>
+            <div class="options">
+                <label><input type="radio" name="10" value="10">10</label>
+                <label><input type="radio" name="6" value="6">6</label>
+                <label><input type="radio" name="0" value="0">0</label>
+            </div>
+            <div class="question-container">
+                <div class="question">3. Are there potential security vulnerabilities in the AI system?</div>
+                <div class="pillars">Security, Reliability</div>
+            </div>
+            <div class="options">
+                <label><input type="radio" name="q3" value="y">2</label>
+                <label><input type="radio" name="q3" value="n">4</label>
+                <label><input type="radio" name="q3" value="na">4</label>
+            </div>
+            <div class="question-container">
+                <div class="question">4. Does the AI system comply with regulatory guidelines?</div>
+                <div class="pillars">Accountability, Compliance</div>
+            </div>
+            <div class="options">
+                <label><input type="radio" name="q4" value="y">2</label>
+                <label><input type="radio" name="q4" value="n">4</label>
+                <label><input type="radio" name="q4" value="na">8</label>
+            </div>
+            <div class="question-container">
+                <div class="question">5. Is there a risk of data privacy breaches?</div>
+                <div class="pillars">Privacy, Data Integrity</div>
+            </div>
+            <div class="options">
+                <label><input type="radio" name="q5" value="y">2</label>
+                <label><input type="radio" name="q5" value="n">4</label>
+                <label><input type="radio" name="q5" value="na">4</label>
+            </div>
+            <br>
+
+            <button onclick="saveResponses()">Save Responses</button>
+            <br>
+            <script>
+    function saveResponses(event) {
+    event.preventDefault(); // Prevent form submission
+
+    let responses = [];
+
+    document.querySelectorAll('input[type="radio"]:checked').forEach(input => {
+        responses.push({
+            question: input.name,  // Use proper question identifier
+            answer: input.value
+        });
+    });
+
+    if (responses.length === 0) {
+        alert("Please select at least one response.");
+        return;
+    }
+
+    fetch('/riq_save', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken()
+        },
+        body: JSON.stringify({ "responses": responses })  // Ensure proper key
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        console.log("Saved data:", data);
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function getCSRFToken() {
+    let csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrftoken='));
+    return csrfToken ? csrfToken.split('=')[1] : '';
+}
+
+document.querySelector("button").addEventListener("click", saveResponses);
+
+</script>
+
+            
+            
+        </form>
+        <table>
+            <tr>
+                <th></th>
+                <th>Security</th>
+                <th>Data Integrity</th>
+                <th>Privacy</th>
+                <th>Safety</th>
+                <th>Transparency</th>
+                <th>Fairness</th>
+                <th>Reliability</th>
+                <th>Accountability</th>
+                <th>Explainability</th>
+            </tr>
+            <tr>
+                <th>AI Inherent Risk Question Pillars</th>
+                <td>18</td>
+                <td>15</td>
+                <td>15</td>
+                <td>8</td>
+                <td>7</td>
+                <td>10</td>
+                <td>12</td>
+                <td>11</td>
+                <td>9</td>
+            </tr>
+            <tr>
+                <td><strong>Max Inherent</strong></td>
+                <td>116</td>
+                <td>98</td>
+                <td>92</td>
+                <td>48</td>
+                <td>48</td>
+                <td>68</td>
+                <td>84</td>
+                <td>68</td>
+                <td>70</td>
+            </tr>
+            <tr>
+                <td><strong>Min Inherent</strong></td>
+                <td>24</td>
+                <td>18</td>
+                <td>16</td>
+                <td>6</td>
+                <td>6</td>
+                <td>14</td>
+                <td>18</td>
+                <td>6</td>
+                <td>16</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+

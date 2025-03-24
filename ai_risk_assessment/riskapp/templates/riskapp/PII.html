@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Assessment Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f8f9fa;
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #34495e;
+            color: white;
+            text-align: center;
+        }
+        .answer-cell {
+            background-color: lightgreen;
+            text-align: center;
+        }
+        select {
+            width: 100%;
+            padding: 5px;
+            border: none;
+            background: transparent;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Risk Assessment Table</h2>
+    <table>
+        <tr>
+            <th>S.No</th>
+            <th>Risk Principle</th>
+            <th>Risk Profile Questionnaire</th>
+            <th>Answer</th>
+        </tr>
+        <tr>
+            <td rowspan="2">1</td>
+            <td rowspan="2">Privacy</td>
+            <td>Are user data logs securely stored?</td>
+            <td class="answer-cell">
+                <select class="response" data-question="Are user data logs securely stored?">
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Does the model treat all demographics fairly?</td>
+            <td class="answer-cell">
+                <select class="response" data-question="Does the model treat all demographics fairly?">
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    
+    <button onclick="saveResponses()">Save Responses</button>
+
+    <script>
+        function saveResponses() {
+            let responses = [];
+            document.querySelectorAll('.response').forEach(select => {
+                responses.push({
+                    question: select.getAttribute('data-question'),
+                    answer: select.value
+                });
+            });
+            
+            fetch('/pii_save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCSRFToken()
+                },
+                body: JSON.stringify(responses)
+            }).then(response => response.json())
+              .then(data => alert(data.message))
+              .catch(error => console.error('Error:', error));
+        }
+
+        function getCSRFToken() {
+            let csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrftoken='));
+            return csrfToken ? csrfToken.split('=')[1] : '';
+        }
+    </script>
+
+</body>
+</html>
+

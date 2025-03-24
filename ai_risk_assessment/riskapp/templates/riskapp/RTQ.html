@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Assessment Tables</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f8f9fa;
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #34495e;
+            color: white;
+            text-align: center;
+        }
+        .answer-cell {
+            background-color: lightgreen;
+            text-align: center;
+        }
+        select {
+            width: 100%;
+            padding: 5px;
+            border: none;
+            background: transparent;
+        }
+        /* Score Table Styling */
+        .score-table th, .score-table td {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+            text-align: center;
+        }
+        /* Range & Assessment Summary Table */
+        .range-table th {
+            background-color: #6c757d;
+            color: white;
+        }
+        .range-table td {
+            background-color: #e9ecef;
+            text-align: center;
+        }
+        /* Risk Highlight Colors */
+        .low-risk {
+            background-color: #f8d7da;
+            color: #721c24;
+            font-weight: bold;
+        }
+        .high-risk {
+            background-color: #d4edda;
+            color: #155724;
+            font-weight: bold;
+        }
+        /* Button Styling */
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Risk Assessment Table</h2>
+    <table>
+        <tr>
+            <th>S.No</th>
+            <th>Risk Principle</th>
+            <th>Risk Profile Questionnaire</th>
+            <th>Rating</th>
+            <th>Guidance</th>
+            <th>Answer</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Data Privacy</td>
+            <td>Are user data logs securely stored?</td>
+            <td>High</td>
+            <td>Ensure data encryption</td>
+            <td class="answer-cell">
+                <select>
+                    <option value="">Blank</option>
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Algorithmic Bias</td>
+            <td>Does the model treat all demographics fairly?</td>
+            <td>Medium</td>
+            <td>Audit training data</td>
+            <td class="answer-cell">
+                <select>
+                    <option value="">Blank</option>
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Model Accuracy</td>
+            <td>Has the AI been tested against benchmark datasets?</td>
+            <td>High</td>
+            <td>Use diverse validation sets</td>
+            <td class="answer-cell">
+                <select>
+                    <option value="">Blank</option>
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Transparency</td>
+            <td>Are AI decisions explainable?</td>
+            <td>Low</td>
+            <td>Provide clear documentation</td>
+            <td class="answer-cell">
+                <select>
+                    <option value="">Blank</option>
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Security</td>
+            <td>Is there protection against adversarial attacks?</td>
+            <td>High</td>
+            <td>Implement robust security measures</td>
+            <td class="answer-cell">
+                <select>
+                    <option value="">Blank</option>
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Save Button Below the Risk Assessment Table -->
+    <button onclick="saveResponses()">Save Risk Assessment Data</button>
+
+    <h2>Score Table</h2>
+    <table class="score-table">
+        <tr>
+            <th>Score</th>
+            <th>0</th>
+            <th>Use case requires a formal risk assessment</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>5</td>
+            <td>Risk assessment recommended</td>
+        </tr>
+    </table>
+
+    <h2>Range & Assessment Summary</h2>
+    <table class="range-table">
+        <tr>
+            <th>Range</th>
+            <th colspan="2">Assessment Summary</th>
+        </tr>
+        <tr>
+            <th>Min</th>
+            <th>Max</th>
+            <th>Summary</th>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>5</td>
+            <td class="low-risk">Low risk, minimal assessment needed.</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>10</td>
+            <td class="high-risk">High risk, detailed review required.</td>
+        </tr>
+    </table>
+    <script>
+        function saveResponses() {
+            let responses = [];
+            let rows = document.querySelectorAll("table:nth-of-type(1) tr"); // Get rows in first table
+            
+            rows.forEach((row, index) => {
+                if (index === 0) return; // Skip header row
+                
+                let cells = row.getElementsByTagName("td");
+                let riskPrinciple = cells[1].innerText;
+                let question = cells[2].innerText;
+                let rating = cells[3].innerText;
+                let guidance = cells[4].innerText;
+                let answer = cells[5].querySelector("select").value;
+
+                responses.push({
+                    "Risk Principle": riskPrinciple,
+                    "Question": question,
+                    "Rating": rating,
+                    "Guidance": guidance,
+                    "Answer": answer
+                });
+            });
+
+            let data = {
+                category: "RTQ",
+                responses: responses
+            };
+
+            console.log("Saving Data:", data);
+
+            fetch('/rtq_save', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Data Saved:", data);
+                alert("Data saved successfully!");
+            })
+            .catch(error => {
+                console.error("Error Saving Data:", error);
+                alert("Failed to save data!");
+            });
+        }
+    </script>
+
+</body>
+</html>
